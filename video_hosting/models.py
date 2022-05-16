@@ -1,8 +1,20 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 
 
 # Create your models here.
+
+
+class Channels(models.Model):
+    name=models.CharField(max_length=255)
+    description = models.TextField()
+    user=models.ManyToManyField('User')
+
+
+
+class User(AbstractUser):
+    subscriptions=models.ManyToManyField(Channels)
+
 
 class Video(models.Model):
     name = models.CharField(max_length=255, default='Untitled')
@@ -32,4 +44,8 @@ class VideoRecomendation(models.Model):
     videos = models.ManyToManyField(Video, blank=True, null=True, related_name='recommendation')
     recommendation_name = models.CharField(max_length=255, default='')
     is_top_rated = models.BooleanField()
+
+
+
+
 

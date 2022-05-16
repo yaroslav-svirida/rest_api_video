@@ -8,10 +8,19 @@ class VideoSerializers(serializers.ModelSerializer):
 
 
 class CommentSerializers(serializers.ModelSerializer):
-    video=VideoSerializers(many=False)
+    # video=VideoSerializers(many=False)
     class Meta:
         fields = ('owner', 'video', 'content', 'likes_count')
         model = Comment
+
+    # def update(self, instance, validated_data):
+    #     instance.owner = validated_data.get('owner', instance.owner)
+    #     instance.video = validated_data.get('video', instance.video)
+    #     instance.content = validated_data.get('content', instance.content)
+    #     instance.likes_count = validated_data.get('likes_count', instance.likes_count)
+    #     instance.save()
+    #     return instance
+
 
 class HashTegSerializer(serializers.ModelSerializer):
     class Meta:
