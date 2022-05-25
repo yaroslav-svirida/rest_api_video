@@ -25,9 +25,11 @@ class CommentView(APIView):
     def post(self, request):
         video_id=request.data.get('video')
         content=request.data.get('content')
+        user_id =request.data.get('user_id')
+        user = User.objects.get(id=user_id)
         video=Video.objects.get(id=video_id)
 
-        comment = Comment.objects.create(video=video, content=content)
+        comment = Comment.objects.create(video=video, content=content, user=user)
         comment_serialized= CommentSerializers(comment).data
         return Response(comment_serialized)
 

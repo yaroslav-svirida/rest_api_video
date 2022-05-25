@@ -1,11 +1,25 @@
 from rest_framework import serializers
 from .models import *
 
+from djoser.serializers import  UserCreateSerializer
+from . import models
+
+class UserCreateCustomSerializer():
+    class Meta(UserCreateSerializer.Meta):
+        model = User
+        fields = ('id', 'email', 'first_name', 'last_name', 'password')
+
+
+
 class VideoSerializers(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'name', 'likes_count', 'user')
+        fields = ('id', 'name', "title", 'likes_count', 'link','user')
         model = Video
 
+class VideoFullSerializers(serializers.ModelSerializer):
+    class Meta:
+        fields = ("__all__")
+        model = Video
 
 class CommentSerializers(serializers.ModelSerializer):
     # video=VideoSerializers(many=False)
