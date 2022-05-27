@@ -53,6 +53,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(blank=False, default=False)
     delete_at = models.DateTimeField(null=True, default=None)
+    subscriptions = models.ManyToManyField(to='video_hosting.Channel', blank=True, null=True,
+                                           related_name="subscribers")
     objects = UserManager()
 
     USERNAME_FIELD = 'email'

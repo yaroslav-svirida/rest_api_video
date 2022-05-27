@@ -78,9 +78,15 @@ class VideoView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class OnlyMyVideoView(APIView):
-    def get(self, request):
-        user = request.user
+class OnlyMyVideoView(generics.ListAPIView):
+    # def get(self, request):
+    #     user = request.user
+    #     videos = Video.objects.filter(user=user)
+    #     serializer_video = VideoFullSerializers(videos).data
+    #     return Response(serializer_video)
+    serializer_class = VideoFullSerializers
+
+    def get_queryset(self):
+        user = self.request.user
         videos = Video.objects.filter(user=user)
-        serializer_video = VideoFullSerializers(videos).data
-        return Response(serializer_video)
+        return videos

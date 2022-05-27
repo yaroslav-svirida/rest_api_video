@@ -1,6 +1,9 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_headers
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -33,6 +36,8 @@ class CommentView(APIView):
         comment_serialized= CommentSerializers(comment).data
         return Response(comment_serialized)
 
+    @method_decorator(cache_page(60 * 2))
+    @method_decorator(vary_on_headers("Authorization", ))
     def get(self, request, pk=None):
         try:
             if not pk:
