@@ -23,4 +23,5 @@ urlpatterns = [
     path('api/', include('video_hosting.urls')),
     path("api/", include("djoser.urls")),
     path("api/", include("djoser.urls.jwt")),
+    path("api/", include("djoser.urls.authtoken")),
 ]

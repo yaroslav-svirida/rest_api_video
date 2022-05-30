@@ -47,10 +47,24 @@ class VideoRecommendationSerializer(serializers.ModelSerializer):
         fields = ('id', 'video', 'recommendation_name', 'is_top_rated')
         model=VideoRecomendation
 
+class UserSubsciberChannel(serializers.ModelSerializer):
+    class Meta:
+        fields = ("id", "name", "owner")
+        model = Channel
+
+class UserSubsciber(serializers.ModelSerializer):
+    subscriptions =UserSubsciberChannel(many=True)
+    class Meta:
+        fields = ("id", "first_name", "last_name", "email","subscriptions")
+        model = User
+
+
 class ChannelSerializer(serializers.ModelSerializer):
+    subscribers =UserSubsciber(many=True)
     class Meta:
         fields = ("id", "name", "subscribers", "owner")
         model = Channel
+
 
 
 class UserSubscriptionsSerializer(serializers.ModelSerializer):

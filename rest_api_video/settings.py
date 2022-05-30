@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'video_hosting',
     'djoser',
     'corsheaders',
-    'rest_framework_simplejwt'
+    'rest_framework_simplejwt',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -141,6 +142,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     # "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
     "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.TokenAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
 }
@@ -157,7 +159,12 @@ SIMPLE_JWT = {
 DJOSER = {
     "LOGIN_FIELD": "email",
     # "SEND_CONFIRMATION_EMAIL": True,
+
+    """этот URL нужен что бы подтверждать зброс пароля """
     "PASSWORD_RESET_CONFIRM_URL": "email/reset/confirm/{uid}/{token}",
+   """этот URL нужен что бы сбрасывать имя пользователя """
+    "USERNAME_RESET_CONFIRM_URL": "#/username/reset/confirm/{uid}/{token}",
+
     "ACTIVATION_URL": "activate/{uid}/{token}",
     # "SEND_ACTIVATION_EMAIL": True,
     "SERIALIZERS": {

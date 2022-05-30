@@ -2,7 +2,7 @@ from django.urls import path
 
 from video_hosting.hash_tag_views import HashTagListRetrieveUpdateDeleteView, HashTagListCreateView
 from video_hosting.serializers import HashTegSerializer
-from video_hosting.users_views import ListUsersView, ResetPasswordView
+from video_hosting.users_views import ListUsersView, ResetPasswordView, ChannelSubscribeView, UserSubscriptionsView
 from video_hosting.video_views import *
 from video_hosting.comment_view import *
 
@@ -40,6 +40,15 @@ urlpatterns += [
 # urlpatterns+=[
 #     path('users/', ListUsersView.as_view())
 # ]
-# urlpatterns=[
-# path("subscribe/", ChannelSubscribeView.as_view())
+urlpatterns+=[
+    path("subscribe/", ChannelSubscribeView.as_view()),
+    path("subscribe/get_all/<int:pk>", ChannelSubscribeView.as_view()),
+    path("subscribe/delete/<int:pk>", ChannelSubscribeView.as_view()),
+
+    ]
+#
+# urlpatterns+=[
+#     path("subscribe/get_user/<int:pk>", UserSubscriptionsView.as_view()),
+#
+#
 #     ]
