@@ -52,3 +52,13 @@ urlpatterns+=[
 #
 #
 #     ]
+
+
+urlpatterns +=[
+    path('channel/create/', ChannelView.as_view()),
+    path('channel/get/<int:pk>', ChannelView.as_view()),
+    path('channel/get/', ChannelView.as_view()),
+    path('channel/update/<int:pk>', ChannelView.as_view()),
+    path('channel/delete/<int:pk>', ChannelView.as_view()),
+
+]

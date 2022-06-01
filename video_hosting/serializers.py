@@ -72,3 +72,9 @@ class UserSubscriptionsSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ("id", "email", "subscriptions")
         model = User
+
+class ChannelsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        fields = ("name","owner")
+        model = Channel

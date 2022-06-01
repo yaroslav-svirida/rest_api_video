@@ -30,7 +30,7 @@ class ChannelSubscribeView(APIView):
     def delete(self, request, pk):
         # channel_id = Channel.objects.get(id=pk)
         channel = Channel.objects.get(id=pk)
-        user_id = request.data.get('user_id')
+        user_id = request.user.id
         channel.subscribers.remove(User.objects.get(id=user_id))
         return Response(status=status.HTTP_204_NO_CONTENT)
 
